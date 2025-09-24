@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en" style="margin-top: -3%;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Edits - Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+   integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" 
+   crossorigin="anonymous" referrerpolicy="no-referrer" />
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+   <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    .page-wrap {
+            max-width: 1200px;
+            margin: 140px auto 120px;
+            padding: 0 20px;
+        }
+    .edits-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .edits-title {
+            font-family: "Macondo", cursive;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .edits-subtitle {
+            font-size: 1rem;
+            color: #ccc;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+</style>
+</head>
+<body>
+    <canvas id="bg-net"></canvas>
+    <img class="image-gradient" src="gradient.png" alt="gradient">
+    <div class="layer-blur"></div>
+    <div class="container">
+        <header>
+            <h1 style="margin-top: -20vh;" class="logo">MY <span style="color: red;">PORTFOLIO</span></h1>
+
+            <div class="bulb-container"><div class="string"></div><div class="bulb"></div></div>
+
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav class="sidebar">
+                    <a href="index.html" class="nav-link">
+                  <span class="icon"><i class="fa-solid fa-house"></i></span>
+                  <span class="link-text">Home</span>
+                </a>
+                <a href="index.html#Projects" class="nav-link">
+                  <span class="icon"><i class="fa-solid fa-photo-film"></i></span>
+                  <span class="link-text">Projects</span>
+                </a>
+                <a href="index.html#about" class="nav-link">
+                  <span class="icon"><i class="fa-solid fa-user"></i></span>
+                  <span class="link-text">About</span>
+                </a>
+                <a href="index.html#contact" class="nav-link">
+                  <span class="icon"><i class="fa-regular fa-envelope" style="color: #ffffff;"></i></span>
+                  <span class="link-text">Mail</span>
+                </a>
+                <a href="index.html#comments" class="nav-link">
+                  <span class="icon"><i class="fa-solid fa-comment"></i></span>
+                  <span class="link-text">Comments</span>
+                </a>
+                <a href="myedits.html" class="nav-link active">
+                  <span class="icon"><i class="fa-solid fa-video"></i></span>
+                  <span class="link-text">My Edits</span>
+                </a>
+                <button id="upload-btn-sidebar" class="nav-link upload-btn-sidebar">
+                  <span class="icon"><i class="fa-solid fa-upload"></i></span>
+                  <span class="link-text">Upload</span>
+                    </button>
+            </nav>
+            <div class="overlay"></div>
+        </header>
+    </div>
+
+
+    <div class="page-wrap">
+        <div class="edits-header">
+            <h1 class="edits-title">My Editing Portfolio</h1>
+            <p class="edits-subtitle">
+                A collection of my video editing works, creative projects, and digital content. 
+                Each piece represents my passion for storytelling through visual media.
+            </p>
+        </div>
+
+    <!-- Gallery Section (Always visible) -->
+    <div class="gallery-section">
+        <h2 class="gallery-title">My Edits</h2>
+        <div class="gallery-grid" id="gallery-grid">
+            <!-- Files will be displayed here -->
+        </div>
+    </div>
+
+    <!-- Upload Modal -->
+    <div id="upload-modal" class="upload-modal" style="display: none;">
+        <div class="upload-modal-content">
+            <div class="upload-modal-header">
+                <h2>Upload Your Edits</h2>
+                <button id="close-modal" class="close-modal">&times;</button>
+            </div>
+            
+            <!-- Password Authentication for Upload -->
+    <div id="password-section" class="password-section">
+        <div class="password-container">
+                    <h3 class="password-title">Access Required</h3>
+            <p class="password-subtitle">Enter password to upload files</p>
+            <div class="password-form">
+                <input type="password" id="password-input" placeholder="Enter password" class="password-field">
+                <button id="password-submit" class="password-btn">
+                    <i class="fas fa-lock"></i> Access
+                </button>
+            </div>
+            <div id="password-error" class="password-error"></div>
+        </div>
+    </div>
+
+    <!-- Upload Section (Hidden initially) -->
+    <div id="upload-section" class="upload-section" style="display: none;">
+        <div class="upload-container">
+            <p class="upload-subtitle">Share your creative work with the world</p>
+            
+            <div class="upload-area" id="upload-area">
+                <div class="upload-content">
+                    <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                    <h3>Drop files here or click to browse</h3>
+                            <p>Supports images and videos (Max 1GB)</p>
+                    <input type="file" id="file-input" multiple accept="image/*,video/*" style="display: none;">
+                </div>
+            </div>
+
+            <div class="file-preview" id="file-preview"></div>
+
+            <div class="upload-controls">
+                <button id="upload-btn" class="upload-btn" disabled>
+                    <i class="fas fa-upload"></i> Upload Files
+                </button>
+                <button style="margin-top: -25vh;" id="logout-btn" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+
+            <div class="upload-progress" id="upload-progress" style="display: none;">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <div class="progress-text" id="progress-text">Uploading...</div>
+            </div>
+
+            <div class="upload-status" id="upload-status"></div>
+        </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Viewer Modal -->
+    <div id="viewer-modal" class="viewer-modal" style="display: none;">
+        <div class="viewer-modal-content">
+            <div class="viewer-header">
+                <h3 id="viewer-title">Viewing File</h3>
+                <button id="close-viewer" class="close-viewer">&times;</button>
+            </div>
+            <div class="viewer-body">
+                <div class="viewer-controls">
+                    <button id="zoom-in" class="viewer-btn" title="Zoom In">
+                        <i class="fas fa-search-plus"></i>
+                    </button>
+                    <button id="zoom-out" class="viewer-btn" title="Zoom Out">
+                        <i class="fas fa-search-minus"></i>
+                    </button>
+                    <button id="reset-zoom" class="viewer-btn" title="Reset Zoom">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                    </button>
+                    <button id="fullscreen" class="viewer-btn" title="Fullscreen">
+                        <i class="fas fa-expand"></i>
+                    </button>
+                </div>
+                <div class="viewer-container">
+                    <img id="viewer-image" class="viewer-image" style="display: none;" alt="Viewing image">
+                    <video id="viewer-video" class="viewer-video" controls style="display: none;">
+                        <source id="viewer-video-source" src="">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div></div>
+
+    <!-- Back to top button -->
+    <a href="#" style="z-index: 1; position: fixed; bottom: 20px; right: 20px; padding: 10px 15px; font-size: 18px; background: rgba(255, 0, 0, 0.282); color: white; border: none; border-radius: 50%; cursor: pointer;"><i class="fa-solid fa-arrow-up"></i></a>
+
+    <footer class="site-footer">
+        <style>
+            .site-footer { 
+                position: relative; 
+                margin-top: 80px; 
+                border-top: 1px solid rgba(255,255,255,0.12);
+                background: rgba(0,0,0,0.2);
+                -webkit-backdrop-filter: blur(4px);
+                backdrop-filter: blur(4px);
+            }
+            .site-footer .footer-inner {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 14px 20px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 12px;
+                color: #ddd;
+                font-size: 0.9rem;
+            }
+            .site-footer .footer-social a {
+                color: #ddd;
+                margin-left: 12px;
+                font-size: 18px;
+                opacity: 0.8;
+                transition: opacity .2s ease, transform .2s ease, color .2s ease;
+            }
+            .site-footer .footer-social a:hover {
+                opacity: 1;
+                transform: translateY(-1px);
+                color: #ff4d4d;
+            }
+            @media (max-width: 600px) {
+                .site-footer .footer-inner {
+                    flex-direction: column;
+                    text-align: center;
+                }
+                .site-footer .footer-social a {
+                    margin: 0 8px;
+                }
+            }
+        </style>
+        <div class="footer-inner" style="margin-bottom: -40%;">
+            <div class="footer-left">© 2025 Shiva Kumar. All rights reserved.</div>
+            <div class="footer-social">
+                <a href="https://github.com/shivakumar4147" aria-label="GitHub" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/shiva-kumar-bb1019364?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" aria-label="LinkedIn" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="https://x.com/Shivakumar4147?t=BXbFKaQxQIj3xVFeiLaT-A&s=09" aria-label="X" title="X / Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="https://www.instagram.com/editoxide_94?igsh=dWMwMWx5cmZuMWVi" aria-label="Instagram" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Background Constellation -->
+    <script src="constellation-bg.js"></script>
+
+    <!-- Supabase Integration -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        // Supabase configuration
+        const supabaseUrl = "https://ergmuovecfxzdjqwrguy.supabase.co";
+        const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVyZ211b3ZlY2Z4emRqcXdyZ3V5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgzMDAxOTAsImV4cCI6MjA3Mzg3NjE5MH0.O5YCKQV5GAhWDCBLoZOwhTyOisHfu63zTTexuFTLWOU"; // Replace with your anon key
+        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+        const BUCKET = 'myedits'; // Must match the bucket name in Supabase
+// Bucket added
+
+        // Password configuration
+        const CORRECT_PASSWORD = "vvvv";
+
+        // DOM elements
+        const uploadModal = document.getElementById('upload-modal');
+        const closeModal = document.getElementById('close-modal');
+        const uploadBtnSidebar = document.getElementById('upload-btn-sidebar');
+        const passwordSection = document.getElementById('password-section');
+        const uploadSection = document.getElementById('upload-section');
+        const passwordInput = document.getElementById('password-input');
+        const passwordSubmit = document.getElementById('password-submit');
+        const passwordError = document.getElementById('password-error');
+        const uploadArea = document.getElementById('upload-area');
+        const fileInput = document.getElementById('file-input');
+        const filePreview = document.getElementById('file-preview');
+        const uploadBtn = document.getElementById('upload-btn');
+        const logoutBtn = document.getElementById('logout-btn');
+        const uploadProgress = document.getElementById('upload-progress');
+        const progressFill = document.getElementById('progress-fill');
+        const progressText = document.getElementById('progress-text');
+        const uploadStatus = document.getElementById('upload-status');
+        const galleryGrid = document.getElementById('gallery-grid');
+
+        // Viewer modal elements
+        const viewerModal = document.getElementById('viewer-modal');
+        const closeViewer = document.getElementById('close-viewer');
+        const viewerTitle = document.getElementById('viewer-title');
+        const viewerImage = document.getElementById('viewer-image');
+        const viewerVideo = document.getElementById('viewer-video');
+        const viewerVideoSource = document.getElementById('viewer-video-source');
+        const zoomInBtn = document.getElementById('zoom-in');
+        const zoomOutBtn = document.getElementById('zoom-out');
+        const resetZoomBtn = document.getElementById('reset-zoom');
+        const fullscreenBtn = document.getElementById('fullscreen');
+
+        let selectedFiles = [];
+        let isAuthenticated = false;
+        let currentZoom = 1;
+
+        // Load gallery immediately on page load
+            loadGallery();
+
+        // Viewer modal functionality
+        closeViewer.addEventListener('click', () => {
+            viewerModal.style.display = 'none';
+            viewerImage.style.display = 'none';
+            viewerVideo.style.display = 'none';
+            currentZoom = 1;
+        });
+
+        // Close viewer when clicking outside
+        viewerModal.addEventListener('click', (e) => {
+            if (e.target === viewerModal) {
+                viewerModal.style.display = 'none';
+                viewerImage.style.display = 'none';
+                viewerVideo.style.display = 'none';
+                currentZoom = 1;
+            }
+        });
+
+        // Zoom functionality
+        zoomInBtn.addEventListener('click', () => {
+            currentZoom = Math.min(currentZoom * 1.2, 5);
+            applyZoom();
+        });
+
+        zoomOutBtn.addEventListener('click', () => {
+            currentZoom = Math.max(currentZoom / 1.2, 0.1);
+            applyZoom();
+        });
+
+        resetZoomBtn.addEventListener('click', () => {
+            currentZoom = 1;
+            applyZoom();
+        });
+
+        fullscreenBtn.addEventListener('click', () => {
+            if (viewerImage.style.display !== 'none') {
+                viewerImage.requestFullscreen();
+            } else if (viewerVideo.style.display !== 'none') {
+                viewerVideo.requestFullscreen();
+            }
+        });
+
+        function applyZoom() {
+            if (viewerImage.style.display !== 'none') {
+                viewerImage.style.transform = `scale(${currentZoom})`;
+            } else if (viewerVideo.style.display !== 'none') {
+                viewerVideo.style.transform = `scale(${currentZoom})`;
+            }
+        }
+
+        // Keyboard shortcuts for viewer
+        document.addEventListener('keydown', (e) => {
+            if (viewerModal.style.display === 'flex') {
+                switch(e.key) {
+                    case 'Escape':
+                        viewerModal.style.display = 'none';
+                        viewerImage.style.display = 'none';
+                        viewerVideo.style.display = 'none';
+                        currentZoom = 1;
+                        break;
+                    case '+':
+                    case '=':
+                        e.preventDefault();
+                        currentZoom = Math.min(currentZoom * 1.2, 5);
+                        applyZoom();
+                        break;
+                    case '-':
+                        e.preventDefault();
+                        currentZoom = Math.max(currentZoom / 1.2, 0.1);
+                        applyZoom();
+                        break;
+                    case '0':
+                        e.preventDefault();
+                        currentZoom = 1;
+                        applyZoom();
+                        break;
+                }
+            }
+        });
+
+        // Modal functionality
+        uploadBtnSidebar.addEventListener('click', () => {
+            uploadModal.style.display = 'block';
+            passwordSection.style.display = 'block';
+            uploadSection.style.display = 'none';
+            passwordInput.value = '';
+            passwordError.style.display = 'none';
+        });
+
+        closeModal.addEventListener('click', () => {
+            uploadModal.style.display = 'none';
+            isAuthenticated = false;
+            passwordSection.style.display = 'block';
+            uploadSection.style.display = 'none';
+            passwordInput.value = '';
+            passwordError.style.display = 'none';
+            selectedFiles = [];
+            filePreview.innerHTML = '';
+            uploadBtn.disabled = true;
+        });
+
+        // Close modal when clicking outside
+        uploadModal.addEventListener('click', (e) => {
+            if (e.target === uploadModal) {
+                uploadModal.style.display = 'none';
+                isAuthenticated = false;
+                passwordSection.style.display = 'block';
+                uploadSection.style.display = 'none';
+                passwordInput.value = '';
+                passwordError.style.display = 'none';
+                selectedFiles = [];
+                filePreview.innerHTML = '';
+                uploadBtn.disabled = true;
+            }
+        });
+
+        // Password authentication
+        passwordSubmit.addEventListener('click', () => {
+            const enteredPassword = passwordInput.value.trim();
+            if (enteredPassword === CORRECT_PASSWORD) {
+                isAuthenticated = true;
+                passwordSection.style.display = 'none';
+                uploadSection.style.display = 'block';
+            } else {
+                passwordError.textContent = 'Incorrect password. Please try again.';
+                passwordError.style.display = 'block';
+                passwordInput.value = '';
+            }
+        });
+
+        passwordInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') passwordSubmit.click();
+        });
+
+        // Logout
+        logoutBtn.addEventListener('click', () => {
+            isAuthenticated = false;
+            passwordSection.style.display = 'block';
+            uploadSection.style.display = 'none';
+            passwordInput.value = '';
+            passwordError.style.display = 'none';
+            selectedFiles = [];
+            filePreview.innerHTML = '';
+            uploadBtn.disabled = true;
+        });
+
+        // File selection
+        uploadArea.addEventListener('click', () => fileInput.click());
+        uploadArea.addEventListener('dragover', e => { e.preventDefault(); uploadArea.classList.add('drag-over'); });
+        uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('drag-over'));
+        uploadArea.addEventListener('drop', e => { e.preventDefault(); uploadArea.classList.remove('drag-over'); handleFiles([...e.dataTransfer.files]); });
+        fileInput.addEventListener('change', e => handleFiles([...e.target.files]));
+
+        function handleFiles(files) {
+            selectedFiles = files.filter(f => (f.type.startsWith('image/') || f.type.startsWith('video/')) && f.size <= 1024*1024*1024); // 1GB limit
+            displayFilePreview();
+            uploadBtn.disabled = selectedFiles.length === 0;
+        }
+
+        function displayFilePreview() {
+            filePreview.innerHTML = '';
+            selectedFiles.forEach((file, i) => {
+                const div = document.createElement('div');
+                div.className = 'preview-item';
+                div.innerHTML = `<span>${file.name} (${(file.size/1024/1024).toFixed(2)} MB)</span> <button onclick="removeFile(${i})">&times;</button>`;
+                filePreview.appendChild(div);
+            });
+        }
+
+        function removeFile(index) {
+            selectedFiles.splice(index,1);
+            displayFilePreview();
+            uploadBtn.disabled = selectedFiles.length===0;
+        }
+
+        // Upload files to Supabase bucket
+        uploadBtn.addEventListener('click', async () => {
+            if (!selectedFiles.length) return;
+            uploadProgress.style.display = 'block';
+            uploadBtn.disabled = true;
+            let success = 0, fail = 0;
+            for (let i=0;i<selectedFiles.length;i++){
+                const file = selectedFiles[i];
+                const fileName = `${Date.now()}_${file.name}`;
+                const { data, error } = await supabase.storage.from(BUCKET).upload(fileName, file);
+                if(error){ console.error(error); fail++; } else { success++; }
+                progressFill.style.width = ((i+1)/selectedFiles.length*100)+'%';
+                progressText.textContent = `Uploading ${file.name}...`;
+            }
+            uploadProgress.style.display = 'none';
+            uploadBtn.disabled = false;
+            uploadStatus.innerHTML = `<div>Uploaded: ${success}, Failed: ${fail}</div>`;
+            selectedFiles = [];
+            filePreview.innerHTML = '';
+            loadGallery();
+        });
+
+        // Load gallery
+        async function loadGallery() {
+            galleryGrid.innerHTML = '';
+            const { data, error } = await supabase.storage.from(BUCKET).list();
+            if(error){ galleryGrid.innerHTML = 'Error loading files'; return; }
+            if(!data.length){ galleryGrid.innerHTML = ''; return; }
+            data.forEach(f=>{
+                const ext = f.name.split('.').pop().toLowerCase();
+                const isImg = ['jpg','jpeg','png','gif','webp'].includes(ext);
+                const isVid = ['mp4','webm','ogg','avi','mov'].includes(ext);
+                const fileItem = document.createElement('div'); 
+                fileItem.className='gallery-item';
+                fileItem.dataset.fileName = f.name;
+                
+                const { data: urlData } = supabase.storage.from(BUCKET).getPublicUrl(f.name);
+                
+                // Create media element
+                let mediaElement;
+                if(isImg) {
+                    mediaElement = `<img src="${urlData.publicUrl}" alt="${f.name}" class="gallery-image">`;
+                } else if(isVid) {
+                    mediaElement = `<video controls class="gallery-video"><source src="${urlData.publicUrl}"></video>`;
+                } else {
+                    mediaElement = `<div class="file-placeholder"><i class="fas fa-file"></i><span>${f.name}</span></div>`;
+                }
+                
+                fileItem.innerHTML = `
+                    <div class="media-container">
+                        ${mediaElement}
+                    </div>
+                    <div class="file-options-strip">
+                        <button class="option-btn-small view-btn" onclick="viewFile('${f.name}', '${urlData.publicUrl}')" title="View">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="option-btn-small share-btn" onclick="shareFile('${f.name}', '${urlData.publicUrl}')" title="Share">
+                            <i class="fas fa-share"></i>
+                        </button>
+                        <div class="file-info-small">
+                            <span class="file-name-small">${f.name}</span>
+                        </div>
+                    </div>
+                `;
+                
+                galleryGrid.appendChild(fileItem);
+            });
+        }
+
+        // File options functions
+        function viewFile(fileName, url) {
+            // Prevent download by using viewer modal instead of opening in new tab
+            const ext = fileName.split('.').pop().toLowerCase();
+            const isImg = ['jpg','jpeg','png','gif','webp'].includes(ext);
+            const isVid = ['mp4','webm','ogg','avi','mov'].includes(ext);
+            
+            viewerTitle.textContent = fileName;
+            
+            if (isImg) {
+                viewerImage.style.display = 'block';
+                viewerVideo.style.display = 'none';
+                viewerImage.src = url;
+                viewerImage.style.transform = 'scale(1)';
+                currentZoom = 1;
+            } else if (isVid) {
+                viewerImage.style.display = 'none';
+                viewerVideo.style.display = 'block';
+                viewerVideoSource.src = url;
+                viewerVideo.load();
+                viewerVideo.style.transform = 'scale(1)';
+                currentZoom = 1;
+            }
+            
+            viewerModal.style.display = 'flex';
+        }
+
+        function shareFile(fileName, url) {
+            if (navigator.share) {
+                navigator.share({
+                    title: fileName,
+                    text: `Check out this file: ${fileName}`,
+                    url: url
+                }).catch(err => console.log('Error sharing:', err));
+            } else {
+                // Fallback: copy to clipboard
+                navigator.clipboard.writeText(url).then(() => {
+                    alert('Link copied to clipboard!');
+                }).catch(() => {
+                    // Fallback for older browsers
+                    const textArea = document.createElement('textarea');
+                    textArea.value = url;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    alert('Link copied to clipboard!');
+                });
+            }
+        }
+
+        // Sidebar toggle functionality
+        const toggleBtn = document.querySelector(".menu-toggle");
+        const sidebar = document.querySelector(".sidebar");
+        const overlay = document.querySelector(".overlay");
+
+        if (toggleBtn && sidebar && overlay) {
+            // Toggle sidebar when clicking the hamburger button
+            toggleBtn.addEventListener("click", () => {
+                sidebar.classList.toggle("active");
+            });
+
+            // Close sidebar when clicking outside (overlay)
+            overlay.addEventListener("click", () => {
+                sidebar.classList.remove("active");
+            });
+
+            // Close sidebar when clicking on any nav link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    sidebar.classList.remove('active');
+                });
+            });
+        }
+    </script>
+</body>
+</html>
+
