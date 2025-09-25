@@ -250,8 +250,8 @@ body.light .bulb {
       position: relative;
       width: 300px;
       height: 300px;
-      margin-left: 50%;
-      margin-top: -20%;
+      margin-left: 65%;
+      margin-top: -16%;
     }
     h1.myworke{
       font-family: "Doto", sans-serif;
@@ -366,6 +366,39 @@ body.light .bulb {
   margin-top: -150px;
   transition: transform 0.3s ease, opacity 0.3s ease;
   transform: scale(0.8);
+}
+
+/* Project media wrapper and link overlay (desktop) */
+.media-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.link-container {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: rgba(0,0,0,0.55);
+  border: 1px solid rgba(255,0,0,0.35);
+  border-radius: 10px;
+  padding: 8px 12px;
+  box-shadow: 0 6px 18px rgba(255,0,0,.25);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: opacity .2s ease, transform .2s ease, visibility .2s ease;
+  z-index: 5;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* Show on hover for desktop */
+.media-wrap:hover .link-container {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
 /* When hovering → pop out */
@@ -548,9 +581,7 @@ width: 100%;
       position: relative;
       width: 150px;
       height: 150px;
-      margin-left: 25%;
-      margin-top: 100px;
-      margin-bottom: 120px;
+      margin: 100px auto 120px;
     }
 
     .center-image {
@@ -705,10 +736,10 @@ width: 100%;
     border-color: rgba(255,0,0,0.28); 
   }
   .textbro_1{
-    font-size: 15px;
+    font-size: 14px;
   }
   .textbro_2{
-    font-size: 15px;
+    font-size: 13.8px;
   }
   
   /* Ensure images fit nicely inside the content box */
@@ -1381,7 +1412,8 @@ img, video, .gallery-item, .media-container {
         height: 100%;
         border-radius: 0;
     }
-    
+
+        
     .viewer-controls {
         padding: 0.5rem;
         gap: 5px;
