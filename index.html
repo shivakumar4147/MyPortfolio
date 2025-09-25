@@ -16,6 +16,14 @@
 
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loading-container">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Loading Portfolio...</div>
+        </div>
+    </div>
+    
     <canvas id="bg-net"></canvas>
     <img class="image-gradient" src="gradient.png" alt="gradient">
     <div class="layer-blur"></div>
@@ -633,6 +641,21 @@ function randomAvatar(seed) {
 
 
 
+});
+
+// Loading screen functionality
+window.addEventListener('load', function() {
+    // Wait for all resources to load
+    setTimeout(function() {
+        const loadingScreen = document.getElementById('loading-screen');
+        if (loadingScreen) {
+            loadingScreen.classList.add('loaded');
+            // Remove from DOM after animation
+            setTimeout(function() {
+                loadingScreen.style.display = 'none';
+            }, 500);
+        }
+    }, 1000); // Minimum 1 second loading time
 });
 </script>
 <script src="constellation-bg.js"></script>
