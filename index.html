@@ -19,8 +19,8 @@
     <!-- Loading Screen -->
     <div id="loading-screen">
         <div class="loading-container">
-            <div class="loading-spinner"></div>
-            <div class="loading-text">Loading Portfolio...</div>
+          <div class="loader"></div>
+            <div style="margin-top: 20px;" class="loading-text">Loading Portfolio...</div>
         </div>
     </div>
     
@@ -612,6 +612,25 @@ function randomAvatar(seed) {
   const s = seed || Math.random().toString(36).substring(2, 8);
   return `https://api.dicebear.com/6.x/identicon/svg?seed=${s}`;
 }
+
+  // Theme toggle functionality
+  const bulbContainer = document.querySelector(".bulb-container");
+  const body = document.body;
+
+  if (bulbContainer) {
+    bulbContainer.addEventListener("click", () => {
+      body.classList.toggle("light");
+      // Save theme preference to localStorage
+      const isLight = body.classList.contains("light");
+      localStorage.setItem("theme", isLight ? "light" : "dark");
+    });
+
+    // Load saved theme on page load
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "light") {
+      body.classList.add("light");
+    }
+  }
 
   // Sidebar toggle functionality
   const toggleBtn = document.querySelector(".menu-toggle");
