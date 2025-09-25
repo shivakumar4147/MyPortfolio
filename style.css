@@ -765,7 +765,7 @@ width: 100%;
 
 /* About grid */
 .about-grid{display:grid;grid-template-columns:1.2fr 0.8fr;gap:24px;align-items:center}
-.about-image{width:100%;height:auto;object-fit: cover; border-radius:14px;border:1px solid rgba(255,0,0,0.25);filter: brightness(1.5);}
+.about-image{width:100%;height:auto;object-fit: cover; border-radius:14px;border:1px solid rgba(255,0,0,0.25);}
 @media(max-width:900px){.about-left{font-size: 12px;}
   .about-grid{grid-template-columns:1fr}.section{margin: -10px 10px}#contact.section{margin: 50px 10px;}
 .comment-info{font-size: 15px;padding-bottom: 10px;font-family:"Macondo",cursive;color:#fff; text-align:center;}}
