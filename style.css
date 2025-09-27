@@ -443,7 +443,6 @@ body.light .bulb {
       box-shadow: 5px 5px 30px red, -5px -5px 30px red;
       pointer-events: none;
       user-select: none;
-      filter: contrast(110%);
     }
 
     /* Rotation animation */
