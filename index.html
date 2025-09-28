@@ -58,6 +58,10 @@
                   <span class="icon"><i class="fa-solid fa-comment"></i></span>
                   <span class="link-text">comments</span>
                 </a>
+                <a href="#certifications" class="nav-link">
+                  <span class="icon"><i class="fa-solid fa-certificate"></i></span>
+                  <span class="link-text">My Certifications</span>
+                </a>
                 <a href="myedits.html" class="nav-link">
                   <span class="icon"><i class="fa-solid fa-video"></i></span>
                   <span class="link-text">My Edits</span>
@@ -66,7 +70,6 @@
             <div class="overlay"></div>
         </header>
     </div>
-
 
 
 
@@ -102,7 +105,8 @@
   <!-- First Item: Image Left, Text Right -->
   <div id="Projects" class="timeline-item left">
     <div class="media-wrap">
-      <img class="content" src="1stproj.png" alt="">
+      <img style="pointer-events: none;
+  user-select: none;" class="content" src="1stproj.png" alt="">
       <a class="link-container" href="https://shivakumar4147.github.io/website/" target="_blank" rel="noopener">View project</a>
     </div>
     <div class="textbro_1">
@@ -115,7 +119,8 @@
   <!-- Second Item: Image Right, Text Left -->
   <div class="timeline-item right">
     <div class="media-wrap">
-      <img class="content" src="travelgiude.png" alt="">
+      <img style="pointer-events: none;
+  user-select: none;" class="content" src="travelgiude.png" alt="">
       <a class="link-container" href="https://shivakumar4147.github.io/TravelGuide/" target="_blank" rel="noopener">View project</a>
     </div>
     <div class="textbro_2">
@@ -127,7 +132,8 @@
   <!-- Third Item: Image Left, Text Right -->
   <div class="timeline-item left">
     <div class="media-wrap">
-      <img class="content" src="cancer detector.png" alt="">
+      <img style="pointer-events: none;
+  user-select: none;" class="content" src="cancer detector.png" alt="">
       <a class="link-container" href="https://huggingface.co/spaces/shivakumar4147/skin_cancer_1" target="_blank" rel="noopener">View project</a>
     </div>
     <div class="textbro_1">
@@ -145,6 +151,45 @@
 
 
 
+
+
+<section  id="certifications" class="certifications-section">
+  <h2>Certifications</h2>
+  <div class="certification-list">
+
+    <div class="certification-item">
+      <img src="Computer Networks And Internet Protocol_page-0001.jpg" 
+           alt="FreeCodeCamp Web Developer" 
+           class="cert-img" 
+           oncontextmenu="return false;">
+      <div class="certification-details">
+        <h3>Computer Networks And Internet Protocol</h3>
+        <p>Jan-Apr 2025
+(12 week course)
+</b> IIT Kharagpur</p>
+      </div>
+    </div>
+
+    <div class="certification-item">
+      <img src="Data Base Management System_page-0001.jpg" 
+           alt="JavaScript Algorithms" 
+           class="cert-img" 
+           oncontextmenu="return false;">
+      <div class="certification-details">
+        <h3>Data Base Management System</h3>
+        <p>Jul-Sep 2025
+(8 week course)</b> IIT Kharagpur</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Fullscreen Lightbox -->
+<div id="lightbox" class="lightbox">
+  <span class="close">&times;</span>
+  <img class="lightbox-content" id="lightbox-img" oncontextmenu="return false;">
+</div>
 
 
 
@@ -173,12 +218,24 @@
             <li><i class="fa-solid fa-check"></i> Design & Creativity: Sketching, Graphic Design, UI/UX Design</li>
             <li><i class="fa-solid fa-check"></i> Other: Video Editing, Freelancing</li>
             <li><i class="fa-solid fa-check"></i> 2+ years of experience in web development, I combine creativity and technical skills to deliver projects that are both functional and visually appealing.</li>
+            <li><i class="fa-solid fa-location-dot"></i></i> Mangalore, Karnataka, India</li>
           </ul>
         </div>
         <div class="about-right">
-           <video class="about-image" autoplay loop muted playsinline width="800" height="300" ><source src="0922.mp4" type="video/mp4"></video>
+           <video style="pointer-events: none;
+  user-select: none;" class="about-image" autoplay loop muted playsinline width="800" height="300" ><source src="0922.mp4" type="video/mp4"></video>
         </div>
       </div>
+    </div>
+  </section>
+
+
+  <section class="edu">
+    <h2>Education</h2>
+    <div class="eduedu">
+      <h3 class="edu1">Bachelor of Engineering - BE, Computer science</h3>
+      <h2 class="edu2">Canara Engineering College</h2>
+      <h3 class="edu3">sep 2024 - sep 2028</h3>
     </div>
   </section>
 
@@ -658,6 +715,31 @@ window.addEventListener('load', function() {
         }
     }, 1000); // Minimum 1 second loading time
 });
+
+
+
+  const images = document.querySelectorAll('.cert-img');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const closeBtn = document.querySelector('.close');
+
+  images.forEach(img => {
+    img.parentElement.addEventListener('click', () => {
+      lightbox.style.display = "block";
+      lightboxImg.src = img.src;
+    });
+  });
+
+  closeBtn.onclick = () => {
+    lightbox.style.display = "none";
+  };
+
+  window.onclick = (event) => {
+    if (event.target === lightbox) {
+      lightbox.style.display = "none";
+    }
+  };
+
 </script>
 <script src="constellation-bg.js"></script>
 </html>
